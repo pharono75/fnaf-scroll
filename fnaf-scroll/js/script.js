@@ -47,6 +47,25 @@ if (ScrollTrigger.isTouch !== 1) {
     })
    })
    
-    
-
 }
+
+
+const hero = document.querySelector('.hero');
+const hammer = new Hammer(hero);
+
+hammer.get('swipe').set({
+  direction: Hammer.DIRECTION_ALL,
+  threshold: 10,
+  velocity: 0.2
+});
+
+hammer.on('swipe', function(event) {
+  if (event.direction === Hammer.DIRECTION_RIGHT) {
+    gsap.to('.hero', {opacity: 0, duration: 0.5});
+  }
+  else if (event.direction === Hammer.DIRECTION_LEFT) {
+    gsap.to('.hero', {opacity: 1, duration: 0.5});
+  }
+});
+
+hammer.get('pan').set({damping: 0.5});
